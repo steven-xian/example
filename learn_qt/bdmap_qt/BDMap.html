@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>CanvasLayer</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DUcoOOGEL6vt1ghHWaTSNr9BBykVhUnA"></script>
+<style type="text/css">
+body, html,#container {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script src="qwebchannel.js"></script>
+<script type="text/javascript">
+    var mp = new BMap.Map("container");
+    mp.centerAndZoom(new BMap.Point(116.3964,39.9093), 10);
+    mp.enableScrollWheelZoom();
+    var points = [];
+
+    new QWebChannel(qt.webChannelTransport, function(c) {
+        mw = c.objects.window;
+    });
+
+
+    mp.addEventListener("click",function(e){
+        mw.RcvPoint(e.point.lng,e.point.lat);
+    });
+
+    function SetPoint(lng,lat){
+        mp.setCenter(new BMap.Point(lng,lat));
+    }
+
+    function AddPoint(lon, lat)
+    {
+        points.push(new BMap.Point(lon, lat));
+    }
+
+    function DrawPath()
+    {
+        var path = new BMap.Polyline(points);
+        mp.addOverlay(path);
+
+        CenterRoute(points);
+    }
+
+    function CenterRoute(Points)
+    {
+        var view = mp.getViewport(eval(Points));
+        var mapZoom = view.zoom;
+        var centerPoint = view.center;
+        mp.centerAndZoom(centerPoint,mapZoom);
+    }
+    
+</script>
