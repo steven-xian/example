@@ -13,6 +13,6 @@ def series_sum(start1, start2, end1, end2, step):
     print("sum:", sum(num))
 
 if __name__ == "__main__":
-    series_sum(11, 13, 97, 99, 2)
+    series_sum(17, 21, 101, 105, 4)
 
     
