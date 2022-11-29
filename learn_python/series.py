@@ -9,7 +9,7 @@ def series_sum(start1, start2, end1, end2, step):
         mul1 += step
         mul2 += step
 
-    print(num) 
+    # print(num) 
     print("sum:", sum(num))
 
 if __name__ == "__main__":
