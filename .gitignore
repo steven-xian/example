@@ -9,3 +9,5 @@ bin/
 out/
 lib/
 *.csv
+*.pdf
+learn_python/finance/plots/
